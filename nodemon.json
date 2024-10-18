@@ -1,0 +1,12 @@
+{
+  "events": {
+    "restart": "echo \">> The server is restarting...\"",
+    "crash": "echo \">> The server crashed... Please wait while nodemon restarts!\"",
+    "start": "echo \">> The server has started successfully!\"",
+    "quit": "echo \">> Nodemon has quit!\""
+  },
+  "watch": ["src"],
+  "ext": "ts,json",
+  "exec": "ts-node src/index.ts",
+  "verbose": true
+}
