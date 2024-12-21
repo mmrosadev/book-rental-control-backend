@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Book API
+  version: 1.0.0
+  description: API for creating books.
+
+paths:
+  /book:
+    post:
+      summary: Create a new book
+      description: Endpoint to create a new book in the database.
+      tags:
+        - Books
+      requestBody:
+        description: Data required to create a book.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookRequest'
+      responses:
+        '200':
+          description: Book successfully created.
+        '400':
+          description: Invalid request. Make sure all required fields are filled in.
+        '500':
+          description: Internal server error.
+components:
+  schemas:
+    BookRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the book.
+          example: "Learning Koa.js"
+        isbn:
+          type: string
+          description: ISBN code of the book.
+          example: "978-3-16-148410-0"
+        author:
+          type: string
+          description: Author of the book.
+          example: "John Doe"
+        year:
+          type: integer
+          description: Year of publication.
+          example: 2023
+      required:
+        - title
+        - isbn
+        - author
+        - year
