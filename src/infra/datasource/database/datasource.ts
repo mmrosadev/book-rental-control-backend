@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm"
-import { BookEntity } from './entities/BookEntity'
+import { BookEntity } from '@/infra/datasource/database/entities'
 import dotenv from 'dotenv'
 
 dotenv.config()

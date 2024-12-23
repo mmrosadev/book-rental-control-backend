@@ -4,7 +4,7 @@
   "description": "NodeJS api to control book rental",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch src --exec ts-node src/index.ts",
+    "start": "nodemon --watch src --exec ts-node -r tsconfig-paths/register src/index.ts",
     "migration:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create",
     "migration:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/infra/datasource/database/datasource.ts",
     "migration:revert": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d ./src/infra/datasource/database/datasource.ts"

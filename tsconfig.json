@@ -2,22 +2,34 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "commonjs",
-    "forceConsistentCasingInFileNames": true,            
-    "strict": true,  
-    "esModuleInterop": true,                      
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/domain/*": [
+        "./src/domain/*"
+      ],
+      "@/infra/*": [
+        "./src/infra/*"
+      ],
+      "@/repository/*": [
+        "./src/repository/*"
+      ],
+    },
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true                         
+    "emitDecoratorMetadata": true
   },
-  "baseUrl": "./src",
-  "paths": {
-    "@/*": ["./src/*"],
-    "@/domain/*": ["./src/domain/*"],
-    "@/infra/*": ["./src/infra/*"],
-    "@/repository/*": ["./src/repository/*"],
-    "@/http/*": ["./src/http/*"],
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,5 +1,5 @@
-import { Book } from "../entity"
+import { Book } from "@/domain/book/entity"
 
-export interface IBookCreateService{
+export interface IBookCreateService {
     handle(book: Book): Promise<Book>
 }
