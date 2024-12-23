@@ -1,7 +1,7 @@
-import { EntityManager } from "typeorm"
-import { Book } from "@/domain/book/entity"
-import { BookEntity, defaultDataSource } from "@/infra/datasource/database"
-import { IBookCreateRepository } from "@/infra/repository/types"
+import { EntityManager } from 'typeorm'
+import { Book } from '@/domain/book/entity'
+import { BookEntity, defaultDataSource } from '@/infra/datasource/database'
+import { IBookCreateRepository } from '@/infra/repository/types'
 
 export class BookCreateRepository implements IBookCreateRepository {
     async handle(book: Book): Promise<Book> {

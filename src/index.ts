@@ -1,16 +1,22 @@
-import Koa from "koa"
-import Router from "koa-router"
-import bodyParser from "koa-bodyparser"
+import Koa from 'koa'
+import Router from 'koa-router'
+import bodyParser from 'koa-bodyparser'
 import { koaSwagger } from 'koa2-swagger-ui'
 import serveStatic from 'koa-static'
 import path from 'path'
-import { initDatabase } from "./infra/datasource"
+import { initDatabase } from './infra/datasource'
 import { routesBook } from './infra/http'
-import { BookCreateService } from "./domain/book/useCase"
-import { BookCreateRepository } from "./infra"
+import { BookCreateService } from './domain/book/useCase'
+import { BookCreateRepository } from './infra'
 
 (async function init() {
-  await initDatabase()
+
+  try {
+    await initDatabase()
+    console.log('Database initialized')
+  } catch (error) {
+    console.log('Failure database initilization', error)
+  }
 
   const PORT = process.env.PORT || 3000
   const app = new Koa()
@@ -25,7 +31,7 @@ import { BookCreateRepository } from "./infra"
         url: 'openapi.yml',
       },
     })
-  );
+  )
   app.use(bodyParser())
 
   const bookCreaterRepository = new BookCreateRepository()
@@ -39,7 +45,6 @@ import { BookCreateRepository } from "./infra"
   app
     .use(router.routes())
     .use(router.allowedMethods())
-  console.info("Data Source has been initialized!")
 
   app.listen(PORT, () => {
     console.info(`Server running on port ${PORT}`)

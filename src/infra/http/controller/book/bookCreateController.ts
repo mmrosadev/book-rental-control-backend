@@ -1,7 +1,7 @@
-import Koa from "koa"
-import { Book } from "@/domain/book/entity"
-import { IBookCreateService } from "@/domain/book/useCase/types"
-import { allFieldsFilled, isEmptyRequestBody } from "@/domain/validate"
+import Koa from 'koa'
+import { Book } from '@/domain/book/entity'
+import { IBookCreateService } from '@/domain/book/useCase/types'
+import { allFieldsFilled, isEmptyRequestBody } from '@/domain/validate'
 
 export function bookCreateController(service: IBookCreateService) {
     return async function result(

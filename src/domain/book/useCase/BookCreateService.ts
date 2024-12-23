@@ -1,5 +1,5 @@
-import { IBookCreateRepository } from "@/infra/repository/types"
-import { Book } from "@/domain/book/entity"
+import { IBookCreateRepository } from '@/infra/repository/types'
+import { Book } from '@/domain/book/entity'
 
 export class BookCreateService {
     constructor(private readonly bookCreateRepository: IBookCreateRepository) { }

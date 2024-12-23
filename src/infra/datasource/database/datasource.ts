@@ -1,11 +1,11 @@
-import { DataSource } from "typeorm"
+import { DataSource } from 'typeorm'
 import { BookEntity } from '@/infra/datasource/database/entities'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 export const defaultDataSource = new DataSource({
-  type: "postgres",
+  type: 'postgres',
   host: process.env.DB_HOST,
   port: +(process.env.DB_PORT || 5432),
   username: process.env.DB_USER,
