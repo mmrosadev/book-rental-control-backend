@@ -1,8 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  // CreateDateColumn,
+  // UpdateDateColumn,
+  // DeleteDateColumn
+} from 'typeorm'
 
 @Entity('books')
 export class BookEntity {
-  @PrimaryGeneratedColumn({name: 'id'})
+  @PrimaryGeneratedColumn({ name: 'id' })
   id!: number
 
   @Column()
@@ -16,4 +23,10 @@ export class BookEntity {
 
   @Column()
   year!: number
+
+  // @CreateDateColumn({ name: 'created_at' }) createdAt?: Date
+
+  // @UpdateDateColumn({ name: 'updated_at' }) updatedAt?: Date
+
+  // @DeleteDateColumn({ name: 'deleted_at' }) deletedAt?: Date
 }

@@ -8,6 +8,8 @@ import { initDatabase } from './infra/datasource'
 import { routesBook } from './infra/http'
 import { BookCreateService } from './domain/book/useCase'
 import { BookCreateRepository } from './infra'
+import { BookFetchRepository } from './infra/repository/books/BookFetchRepository'
+import { BookFetchService } from './domain/book/useCase/BookFetchService'
 
 (async function init() {
 
@@ -34,12 +36,16 @@ import { BookCreateRepository } from './infra'
   )
   app.use(bodyParser())
 
-  const bookCreaterRepository = new BookCreateRepository()
-  const bookCreateService = new BookCreateService(bookCreaterRepository)
+  const bookCreateRepository = new BookCreateRepository()
+  const bookCreateService = new BookCreateService(bookCreateRepository)
+  const bookFetchRepository = new BookFetchRepository()
+  const bookFetchService = new BookFetchService(bookFetchRepository)
+
 
   routesBook(
     router,
-    bookCreateService
+    bookCreateService,
+    bookFetchService
   )
 
   app
