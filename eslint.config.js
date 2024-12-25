@@ -13,7 +13,7 @@ export default [
             '@typescript-eslint': typescriptPlugin,
         },
         rules: {
-            'quotes': ['error', 'single'],
+            'quotes': ['error', 'single', { 'avoidEscape': true }],
             'semi': ['error', 'never'],
             '@typescript-eslint/no-unused-vars': ['error'],
         },
