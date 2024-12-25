@@ -1,5 +1,5 @@
 import { Book } from '@/domain/book/entity'
-import { IBookFetchDataResponse } from '@/infra'
+import { IBookFetchDataResponse, IBookFetchQueryParams } from '@/infra'
 
 export interface IBookCreateService {
     handle(book: Book): Promise<Book>
@@ -7,11 +7,7 @@ export interface IBookCreateService {
 
 export interface IBookFetchService {
     handle(
-        filters?: FilterValue,
-        fields?: (keyof BookResponse)[],
-        order?: OrderValue,
-        page?: number,
-        itemsPerPage?: number,
+        queryParams: IBookFetchQueryParams
     ): Promise<IBookFetchDataResponse>
 }
 

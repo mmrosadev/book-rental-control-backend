@@ -2,9 +2,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  // CreateDateColumn,
-  // UpdateDateColumn,
-  // DeleteDateColumn
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn
 } from 'typeorm'
 
 @Entity('books')
@@ -24,9 +24,9 @@ export class BookEntity {
   @Column()
   year!: number
 
-  // @CreateDateColumn({ name: 'created_at' }) createdAt?: Date
+  @CreateDateColumn({ name: 'created_at' }) createdAt?: Date
 
-  // @UpdateDateColumn({ name: 'updated_at' }) updatedAt?: Date
+  @UpdateDateColumn({ name: 'updated_at' }) updatedAt?: Date
 
-  // @DeleteDateColumn({ name: 'deleted_at' }) deletedAt?: Date
+  @DeleteDateColumn({ name: 'deleted_at' }) deletedAt?: Date
 }

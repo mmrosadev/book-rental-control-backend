@@ -1,14 +1,16 @@
 import Koa from 'koa'
-import { FilterValue, IBookFetchService, OrderValue } from '@/domain/book/useCase/types'
-import { IBookFetchDataResponse } from '@/infra/repository'
+import { IBookFetchService } from '@/domain/book/useCase/types'
+import { IBookFetchQueryParams } from '@/infra/repository'
 
 export function bookFetchController(service: IBookFetchService) {
     return async function result(
         context: Koa.Context
     ): Promise<void> {
 
+        const query = context.query as IBookFetchQueryParams
+
         try {
-            const response = await service.handle()
+            const response = await service.handle(query)
             context.status = 200
             context.body = response
         } catch (error) {

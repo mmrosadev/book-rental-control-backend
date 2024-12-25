@@ -1,20 +1,14 @@
-import { IBookFetchDataResponse, IBookFetchRepository } from '@/infra/repository'
-import { FilterValue, IBookFetchService, OrderValue } from './types'
-import { BookEntity } from '@/infra'
-
+import { IBookFetchDataResponse, IBookFetchQueryParams, IBookFetchRepository } from '@/infra/repository'
+import { IBookFetchService } from './types'
 
 export class BookFetchService implements IBookFetchService {
 
     constructor(private readonly bookFetchRepository: IBookFetchRepository) { }
 
     async handle(
-        filters: FilterValue,
-        fields?: (keyof BookEntity)[],
-        order?: OrderValue,
-        page?: number,
-        itemsPerPage?: number,
+        queryParams: IBookFetchQueryParams
     ): Promise<IBookFetchDataResponse> {
-        const response = await this.bookFetchRepository.handle(filters, fields, order, page, itemsPerPage)
+        const response = await this.bookFetchRepository.handle(queryParams)
         return response
     }
 }

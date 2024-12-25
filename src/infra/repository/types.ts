@@ -15,10 +15,14 @@ export interface IBookCreateRepository {
 
 export interface IBookFetchRepository {
     handle(
-        filters: FilterValue,
-        fields?: (keyof BookEntity)[],
-        order?: OrderValue,
-        page?: number,
-        itemsPerPage?: number,
+        queryParams: IBookFetchQueryParams
     ): Promise<IBookFetchDataResponse>
+}
+
+export interface IBookFetchQueryParams {
+    filters?: FilterValue,
+    fields?: (keyof BookEntity)[],
+    order?: OrderValue,
+    page?: number,
+    itemsPerPage?: number,
 }

@@ -6,7 +6,7 @@ import { allFieldsFilled, isEmptyRequestBody } from '@/domain/validate'
 export function bookCreateController(service: IBookCreateService) {
     return async function result(
         context: Koa.Context
-    ): Promise<boolean> {
+    ): Promise<void> {
 
         isEmptyRequestBody(context)
         allFieldsFilled(context)
@@ -15,9 +15,14 @@ export function bookCreateController(service: IBookCreateService) {
         const { title, isbn, author, year } = body as Book
         const book = new Book({ title, isbn, author, year })
 
-        await service.handle(book)
-        context.status = 200
+        try {
+            await service.handle(book)
+            context.status = 200
+        } catch (error) {
+            console.log({ error })
+            context.status = 500
+            context.body = { message: 'error create book' }
+        }
 
-        return true
     }
 }

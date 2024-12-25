@@ -9,7 +9,10 @@ export class CreateBookTable1728773642492 implements MigrationInterface {
                 title VARCHAR(200) NOT NULL,
                 author VARCHAR(100) NOT NULL,
                 isbn VARCHAR(13) NOT NULL,
-                year INT NOT NULL
+                year INT NOT NULL,
+                created_at TIMESTAMPTZ DEFAULT now(),
+                updated_at TIMESTAMPTZ DEFAULT now(),
+                deleted_at TIMESTAMPTZ
             )
         `)
     }
