@@ -1,18 +1,27 @@
 import Koa from 'koa'
 import { Book } from '@/domain/book/entity'
 import { IBookCreateService } from '@/domain/book/useCase/types'
-import { allFieldsFilled, isEmptyRequestBody } from '@/domain/validate'
+import { getMissingFields, isEmptyRequestBody } from '@/domain/validate'
 
 export function bookCreateController(service: IBookCreateService) {
     return async function result(
         context: Koa.Context
     ): Promise<void> {
 
-        isEmptyRequestBody(context)
-        allFieldsFilled(context)
+        const { request } = context
+        const body = request.body as Book
 
-        const body = context.request.body
-        const { title, isbn, author, year } = body as Book
+        if (isEmptyRequestBody(body)) {
+            context.throw(400, 'Request body must not be empty')
+        }
+
+        const missingFields = getMissingFields(body)
+
+        if (missingFields.length > 0) {
+            context.throw(400, `The following fields must not be empty: ${missingFields.join(', ')}`)
+        }
+
+        const { title, isbn, author, year } = body
         const book = new Book({ title, isbn, author, year })
 
         try {

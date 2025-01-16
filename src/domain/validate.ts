@@ -1,25 +1,27 @@
 import Koa from 'koa'
 import { Book } from './book/entity'
 
-export function isEmptyRequestBody(context: Koa.Context) {
-    const { body } = context.request
-    if (!body || Object.keys(body).length == 0) {
-        context.throw(400,'request body must not be empty')
-    }
+export function isEmptyRequestBody(body: Book): boolean {
+    return !body || Object.keys(body).length == 0
 }
 
-export function allFieldsFilled(context: Koa.Context) {
-    const { body } = context.request
-    const { title, isbn, author, year } = body as Book
-    
-    const missingFields = []
+export function getMissingFields(body: Book): string[] {
+    const { title, isbn, author, year } = body as Partial<Book>
 
-    if (!title) missingFields.push('title')
-    if (!isbn) missingFields.push('isbn')
-    if (!author) missingFields.push('author')
-    if (!year) missingFields.push('year')
+    const fields = []
 
-    if (missingFields.length > 0) {
-        context.throw(400,`The following fields must not be empty: ${missingFields.join(', ')}`)
-    }
+    if (!title) fields.push('title')
+    if (!isbn) fields.push('isbn')
+    if (!author) fields.push('author')
+    if (!year) fields.push('year')
+
+    return fields
+}
+
+export function isArrayNumber(value: string): boolean {
+    const array = value?.split(',')
+        .filter(item => item.trim() !== '')
+        .map(Number)
+
+    return array && array?.length > 0 && array.every(item => !isNaN(item))
 }
