@@ -1,13 +1,38 @@
 import Koa from 'koa'
-import { IBookFetchService } from '@/domain/book/useCase/types'
+import qs from 'qs'
+import { FilterValue, IBookFetchService } from '@/domain/book/useCase/types'
 import { IBookFetchQueryParams } from '@/infra/repository'
+import { getMissingFilters, isArrayNumber, isInvalidTimestamp } from '@/domain/validate'
 
 export function bookFetchController(service: IBookFetchService) {
     return async function result(
         context: Koa.Context
     ): Promise<void> {
 
-        const query = context.query as IBookFetchQueryParams
+        const query = qs.parse(context.query as unknown as string) as IBookFetchQueryParams
+        const id = query?.filters?.id
+
+        if (id && (!isArrayNumber(id) || !Number.isInteger(parseInt(id)))) {
+            context.throw(400, 'id must be a valid integer or a comma-separated list of integers.')
+        }
+
+        if (query && query.filters) {
+            const missingFilters = getMissingFilters(query.filters as FilterValue)
+
+            if (missingFilters && missingFilters.length > 0) {
+                context.throw(400, `the following filters must not be empty: ${missingFilters.join(', ')}.`)
+            }
+
+            const { createdAt, updatedAt, deletedAt } = query.filters
+            const timestamps = { createdAt, updatedAt, deletedAt }
+
+            for (const [key, value] of Object.entries(timestamps)) {
+                if (value && isInvalidTimestamp(value)) {
+                    context.throw(400, `the ${key} filter must be a valid format of timestamp.`)
+                }
+            }
+        }
+
 
         try {
             const response = await service.handle(query)

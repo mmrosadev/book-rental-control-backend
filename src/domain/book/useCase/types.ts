@@ -11,13 +11,13 @@ export interface IBookFetchService {
     ): Promise<IBookFetchDataResponse>
 }
 
-export const orderValueFields = ['name', 'author', 'year', 'createdAt', 'updatedAt', 'deleteAt']
+export const orderValueFields = ['name', 'author', 'year', 'createdAt', 'updatedAt', 'deletedAt']
 
 export type OrderValue = {
     [key in typeof orderValueFields[number]]?: 'ASC' | 'DESC'
 }
 
-export const filterValueFields = ['id', 'author', 'title', 'isbn', 'year']
+export const filterValueFields = ['id', 'author', 'title', 'isbn', 'year', 'createdAt', 'updatedAt', 'deletedAt']
 
 export type FilterValue = {
     [key in typeof filterValueFields[number]]?: string

@@ -12,13 +12,13 @@ export function bookCreateController(service: IBookCreateService) {
         const body = request.body as Book
 
         if (isEmptyRequestBody(body)) {
-            context.throw(400, 'Request body must not be empty')
+            context.throw(400, 'request body must not be empty')
         }
 
         const missingFields = getMissingFields(body)
 
         if (missingFields.length > 0) {
-            context.throw(400, `The following fields must not be empty: ${missingFields.join(', ')}`)
+            context.throw(400, `the following fields must not be empty: ${missingFields.join(', ')}`)
         }
 
         const { title, isbn, author, year } = body
