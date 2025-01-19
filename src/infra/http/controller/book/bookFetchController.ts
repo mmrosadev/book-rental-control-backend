@@ -13,14 +13,14 @@ export function bookFetchController(service: IBookFetchService) {
         const id = query?.filters?.id
 
         if (id && (!isArrayNumber(id) || !Number.isInteger(parseInt(id)))) {
-            context.throw(400, 'id must be a valid integer or a comma-separated list of integers.')
+            return context.throw(400, 'id must be a valid integer or a comma-separated list of integers.')
         }
 
         if (query && query.filters) {
             const missingFilters = getMissingFilters(query.filters as FilterValue)
 
             if (missingFilters && missingFilters.length > 0) {
-                context.throw(400, `the following filters must not be empty: ${missingFilters.join(', ')}.`)
+                return context.throw(400, `the following filters must not be empty: ${missingFilters.join(', ')}.`)
             }
 
             const { createdAt, updatedAt, deletedAt } = query.filters
@@ -28,7 +28,7 @@ export function bookFetchController(service: IBookFetchService) {
 
             for (const [key, value] of Object.entries(timestamps)) {
                 if (value && isInvalidTimestamp(value)) {
-                    context.throw(400, `the ${key} filter must be a valid format of timestamp.`)
+                    return context.throw(400, `the ${key} filter must be a valid format of timestamp.`)
                 }
             }
         }
