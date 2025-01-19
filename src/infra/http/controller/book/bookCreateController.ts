@@ -18,7 +18,7 @@ export function bookCreateController(service: IBookCreateService) {
         const missingFields = getMissingFields(body)
 
         if (missingFields.length > 0) {
-            context.throw(400, `the following fields must not be empty: ${missingFields.join(', ')}`)
+            return context.throw(400, `the following fields must not be empty: ${missingFields.join(', ')}`)
         }
 
         const { title, isbn, author, year } = body
