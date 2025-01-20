@@ -96,7 +96,7 @@ describe('bookCreateController', () => {
 
         const bookCreateRepository: IBookCreateRepository = {
             handle: jest.fn().mockImplementation(() => {
-                throw new Error('Book was not created')
+                throw new Error('book was not created')
             })
         }
 
@@ -105,7 +105,7 @@ describe('bookCreateController', () => {
         const controller = bookCreateController(bookCreateService)
         await controller(mockContext)
         expect(mockContext.status).toBe(500)
-        expect(mockContext.body).toEqual({ message: 'error create book' })
+        expect(mockContext.body).toEqual({ message: new Error('book was not created') })
         jest.restoreAllMocks()
     })
 
