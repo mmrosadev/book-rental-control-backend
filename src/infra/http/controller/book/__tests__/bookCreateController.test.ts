@@ -52,35 +52,31 @@ describe('bookCreateController', () => {
     })
 
 
-    it('should return 200 status when fields of body are complete', async () => {
-        const book = {
-            title: "Harry Potter and the Philosopher's Stone",
-            isbn: "129933439",
-            author: "J.K Rowling",
-            year: 1997
-        }
-
+    it('should thrown 400 error when year is not integer', async () => {
         const mockContext = {
             request: {
-                body: book,
+                body: {
+                    title: "Harry Potter and the Philosopher's Stone",
+                    isbn: "129933439",
+                    author: "J.K Rowling",
+                    year: "19.9"
+                }
             },
-            response: book,
+            response: {},
             throw: jest.fn(),
             status: 0,
             body: null,
         } as unknown as Koa.Context;
 
         const bookCreateRepository: IBookCreateRepository = {
-            handle: jest.fn().mockResolvedValue(book)
+            handle: jest.fn()
         }
 
         const bookCreateService = new BookCreateService(bookCreateRepository)
         const controller = bookCreateController(bookCreateService)
         await controller(mockContext)
-        expect(mockContext.status).toBe(200)
+        expect(mockContext.throw).toHaveBeenCalledWith(400, 'year must be a integer value')
     })
-
-
 
     it('should return 500 status when book was not created', async () => {
         jest.spyOn(console, 'log').mockImplementation(() => { })
@@ -112,4 +108,34 @@ describe('bookCreateController', () => {
         expect(mockContext.body).toEqual({ message: 'error create book' })
         jest.restoreAllMocks()
     })
+
+
+    it('should return 200 status when fields of body are complete', async () => {
+        const book = {
+            title: "Harry Potter and the Philosopher's Stone",
+            isbn: "129933439",
+            author: "J.K Rowling",
+            year: 1997
+        }
+
+        const mockContext = {
+            request: {
+                body: book,
+            },
+            response: book,
+            throw: jest.fn(),
+            status: 0,
+            body: null,
+        } as unknown as Koa.Context;
+
+        const bookCreateRepository: IBookCreateRepository = {
+            handle: jest.fn().mockResolvedValue(book)
+        }
+
+        const bookCreateService = new BookCreateService(bookCreateRepository)
+        const controller = bookCreateController(bookCreateService)
+        await controller(mockContext)
+        expect(mockContext.status).toBe(200)
+    })
+
 })
