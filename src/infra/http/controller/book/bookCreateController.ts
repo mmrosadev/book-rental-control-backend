@@ -21,7 +21,13 @@ export function bookCreateController(service: IBookCreateService) {
             return context.throw(400, `the following fields must not be empty: ${missingFields.join(', ')}`)
         }
 
+
         const { title, isbn, author, year } = body
+
+        if (isNaN(year) || !Number.isInteger(Number(year))) {
+            return context.throw(400, `year must be a integer value`)
+        }
+
         const book = new Book({ title, isbn, author, year })
 
         try {
