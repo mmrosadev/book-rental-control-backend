@@ -9,7 +9,7 @@ export class BookCreateService implements IBookCreateService {
         const result = this.bookCreateRepository.handle(book)
 
         if (!result) {
-            throw new Error('Book was not created')
+            throw new Error('book was not created')
         }
 
         return result

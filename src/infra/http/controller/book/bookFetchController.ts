@@ -41,7 +41,7 @@ export function bookFetchController(service: IBookFetchService) {
         } catch (error) {
             console.log({ error })
             context.status = 500
-            context.body = { message: 'error fetching books' }
+            context.body = { message: error }
         }
     }
 }

@@ -36,7 +36,7 @@ export function bookCreateController(service: IBookCreateService) {
         } catch (error) {
             console.log({ error })
             context.status = 500
-            context.body = { message: 'error create book' }
+            context.body = { message: error }
         }
 
     }
