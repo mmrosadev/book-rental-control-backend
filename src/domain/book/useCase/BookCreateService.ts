@@ -6,12 +6,16 @@ export class BookCreateService implements IBookCreateService {
     constructor(private readonly bookCreateRepository: IBookCreateRepository) { }
 
     async handle(book: Book): Promise<Book> {
-        const result = this.bookCreateRepository.handle(book)
+        try {
+            const result = await this.bookCreateRepository.handle(book)
 
-        if (!result) {
-            throw new Error('book was not created')
+            if (!result) {
+                throw new Error('book was not created')
+            }
+
+            return result
+        } catch (error) {
+            throw new Error(`Faleid to create book: ${(error instanceof Error ? error.message : 'Unknown error')}`)
         }
-
-        return result
     }
 }

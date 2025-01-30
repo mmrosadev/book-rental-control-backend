@@ -5,9 +5,9 @@ import { IBookCreateRepository } from '@/infra/repository/types'
 
 export class BookCreateRepository implements IBookCreateRepository {
     async handle(book: Book): Promise<Book> {
-        await defaultDataSource.transaction(async (transactionalEntityManager: EntityManager): Promise<void> => {
+        return await defaultDataSource.transaction(async (transactionalEntityManager: EntityManager): Promise<Book> => {
             await transactionalEntityManager.insert(BookEntity, book)
+            return book
         })
-        return book
     }
 }

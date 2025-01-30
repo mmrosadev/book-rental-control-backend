@@ -1,7 +1,7 @@
 import Koa from 'koa'
-import { BookCreateService } from "@/domain/book/useCase"
-import { bookCreateController } from "../bookCreateController"
-import { IBookCreateRepository } from "@/infra/repository"
+import { BookCreateService } from '@/domain/book/useCase'
+import { bookCreateController } from '../bookCreateController'
+import { IBookCreateRepository } from '@/infra/repository'
 
 describe('bookCreateController', () => {
     it('should thrown 400 error when request body is empty', async () => {
@@ -13,7 +13,7 @@ describe('bookCreateController', () => {
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookCreateRepository: IBookCreateRepository = {
             handle: jest.fn()
@@ -29,8 +29,8 @@ describe('bookCreateController', () => {
         const mockContext = {
             request: {
                 body: {
-                    title: "",
-                    isbn: "",
+                    title: '',
+                    isbn: '',
                     author: undefined,
                     year: undefined
                 },
@@ -39,7 +39,7 @@ describe('bookCreateController', () => {
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookCreateRepository: IBookCreateRepository = {
             handle: jest.fn()
@@ -57,16 +57,16 @@ describe('bookCreateController', () => {
             request: {
                 body: {
                     title: "Harry Potter and the Philosopher's Stone",
-                    isbn: "129933439",
-                    author: "J.K Rowling",
-                    year: "19.9"
+                    isbn: '129933439',
+                    author: 'J.K Rowling',
+                    year: '19.9'
                 }
             },
             response: {},
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookCreateRepository: IBookCreateRepository = {
             handle: jest.fn()
@@ -83,8 +83,8 @@ describe('bookCreateController', () => {
 
         const book = {
             title: "Harry Potter and the Philosopher's Stone",
-            isbn: "129933439",
-            author: "J.K Rowling",
+            isbn: '129933439',
+            author: 'J.K Rowling',
             year: 1997
         }
 
@@ -92,11 +92,11 @@ describe('bookCreateController', () => {
             request: {
                 body: book,
             },
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookCreateRepository: IBookCreateRepository = {
             handle: jest.fn().mockImplementation(() => {
-                throw new Error('book was not created')
+                throw new Error('database error')
             })
         }
 
@@ -105,7 +105,7 @@ describe('bookCreateController', () => {
         const controller = bookCreateController(bookCreateService)
         await controller(mockContext)
         expect(mockContext.status).toBe(500)
-        expect(mockContext.body).toEqual({ message: new Error('book was not created') })
+        expect(mockContext.body).toEqual({ message: new Error('Faleid to create book: database error') })
         jest.restoreAllMocks()
     })
 
@@ -113,8 +113,8 @@ describe('bookCreateController', () => {
     it('should return 200 status when fields of body are complete', async () => {
         const book = {
             title: "Harry Potter and the Philosopher's Stone",
-            isbn: "129933439",
-            author: "J.K Rowling",
+            isbn: '129933439',
+            author: 'J.K Rowling',
             year: 1997
         }
 
@@ -126,7 +126,7 @@ describe('bookCreateController', () => {
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookCreateRepository: IBookCreateRepository = {
             handle: jest.fn().mockResolvedValue(book)
