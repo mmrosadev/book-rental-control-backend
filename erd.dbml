@@ -1,0 +1,10 @@
+Table books{
+    id integer [pk, increment]
+    title varchar(200) [not null]
+    author varchar(100) [not null]
+    isbn varchar(13) [not null]
+    year interger [not null]
+    created_at timestamp
+    updated_at timestamp
+    deleted_at timestamp
+}
