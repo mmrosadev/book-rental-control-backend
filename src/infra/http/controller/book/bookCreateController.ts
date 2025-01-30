@@ -25,7 +25,7 @@ export function bookCreateController(service: IBookCreateService) {
         const { title, isbn, author, year } = body
 
         if (isNaN(year) || !Number.isInteger(Number(year))) {
-            return context.throw(400, `year must be a integer value`)
+            return context.throw(400, 'year must be a integer value')
         }
 
         const book = new Book({ title, isbn, author, year })

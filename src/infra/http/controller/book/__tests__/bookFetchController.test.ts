@@ -1,7 +1,7 @@
 import Koa from 'koa'
-import { BookFetchService } from "@/domain/book/useCase"
-import { bookFetchController } from "../bookFetchController"
-import { IBookFetchRepository } from "@/infra/repository"
+import { BookFetchService } from '@/domain/book/useCase'
+import { bookFetchController } from '../bookFetchController'
+import { IBookFetchRepository } from '@/infra/repository'
 
 describe('bookFetchController', () => {
 
@@ -16,7 +16,7 @@ describe('bookFetchController', () => {
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookFetchRepository: IBookFetchRepository = {
             handle: jest.fn()
@@ -39,7 +39,7 @@ describe('bookFetchController', () => {
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookFetchRepository: IBookFetchRepository = {
             handle: jest.fn()
@@ -66,7 +66,7 @@ describe('bookFetchController', () => {
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookFetchRepository: IBookFetchRepository = {
             handle: jest.fn()
@@ -89,7 +89,7 @@ describe('bookFetchController', () => {
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookFetchRepository: IBookFetchRepository = {
             handle: jest.fn()
@@ -112,7 +112,7 @@ describe('bookFetchController', () => {
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookFetchRepository: IBookFetchRepository = {
             handle: jest.fn()
@@ -135,7 +135,7 @@ describe('bookFetchController', () => {
             throw: jest.fn(),
             status: 0,
             body: null,
-        } as unknown as Koa.Context;
+        } as unknown as Koa.Context
 
         const bookFetchRepository: IBookFetchRepository = {
             handle: jest.fn()
@@ -148,7 +148,7 @@ describe('bookFetchController', () => {
     })
 
     it('should return status 200', async () => {
-        const mockContext = {} as unknown as Koa.Context;
+        const mockContext = {} as unknown as Koa.Context
 
         const bookFetchRepository: IBookFetchRepository = {
             handle: jest.fn().mockResolvedValue({})
@@ -162,7 +162,7 @@ describe('bookFetchController', () => {
 
     it('should return status 500', async () => {
         jest.spyOn(console, 'log').mockImplementation(() => { })
-        const mockContext = {} as unknown as Koa.Context;
+        const mockContext = {} as unknown as Koa.Context
 
         const bookFetchRepository: IBookFetchRepository = {
             handle: jest.fn().mockImplementation(() => {
