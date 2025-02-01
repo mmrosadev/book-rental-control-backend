@@ -1,5 +1,5 @@
-import { IBookFetchQueryParams, IBookFetchRepository } from "@/infra"
-import { BookFetchService } from "../BookFetchService"
+import { IBookFetchQueryParams, IBookFetchRepository } from '@/infra'
+import { BookFetchService } from '../BookFetchService'
 
 describe('BookFetchService', () => {
     test('Should throw error when data fetch is empty', () => {
@@ -30,22 +30,22 @@ describe('BookFetchService', () => {
             data: [
                 {
                     id: 1,
-                    title: "meu livro",
-                    author: "may",
-                    isbn: "134564",
+                    title: 'meu livro',
+                    author: 'may',
+                    isbn: '134564',
                     year: 2024,
-                    createdAt: "2024-12-25T22:04:11.245Z",
-                    updatedAt: "2024-12-25T22:04:11.245Z",
+                    createdAt: '2024-12-25T22:04:11.245Z',
+                    updatedAt: '2024-12-25T22:04:11.245Z',
                     deletedAt: null
                 },
                 {
                     id: 2,
-                    title: "meditacaoes de marco aurelio",
-                    author: "marco aurelio",
-                    isbn: "290290",
+                    title: 'meditacaoes de marco aurelio',
+                    author: 'marco aurelio',
+                    isbn: '290290',
                     year: 1403,
-                    createdAt: "2024-12-25T22:05:59.229Z",
-                    updatedAt: "2024-12-25T22:05:59.229Z",
+                    createdAt: '2024-12-25T22:05:59.229Z',
+                    updatedAt: '2024-12-25T22:05:59.229Z',
                     deletedAt: null
                 },
             ],
