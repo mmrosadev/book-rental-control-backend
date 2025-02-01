@@ -13,7 +13,7 @@ describe('BookCreateService', () => {
 
         const bookCreateService = new BookCreateService(bookCreateRepository)
         const book = new Book({ author: 'Stalone', isbn: '1234567891011', title: 'Rocky Balboa', year: 2016 })
-        expect(bookCreateService.handle(book)).rejects.toThrow('Faleid to create book: database error')
+        expect(bookCreateService.handle(book)).rejects.toThrow('database error')
 
     })
 

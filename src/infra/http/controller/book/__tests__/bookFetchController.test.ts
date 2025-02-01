@@ -166,7 +166,7 @@ describe('bookFetchController', () => {
 
         const bookFetchRepository: IBookFetchRepository = {
             handle: jest.fn().mockImplementation(() => {
-                throw new Error('failed to fetch books')
+                throw new Error('database error')
             })
         }
 
@@ -174,7 +174,7 @@ describe('bookFetchController', () => {
         const controller = bookFetchController(bookFetchService)
         await controller(mockContext)
         expect(mockContext.status).toBe(500)
-        expect(mockContext.body).toEqual({ message: new Error('failed to fetch books') })
+        expect(mockContext.body).toEqual({ message: new Error('database error') })
         jest.restoreAllMocks()
     })
 })

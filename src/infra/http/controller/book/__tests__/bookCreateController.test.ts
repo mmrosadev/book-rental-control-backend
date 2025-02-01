@@ -105,7 +105,7 @@ describe('bookCreateController', () => {
         const controller = bookCreateController(bookCreateService)
         await controller(mockContext)
         expect(mockContext.status).toBe(500)
-        expect(mockContext.body).toEqual({ message: new Error('Faleid to create book: database error') })
+        expect(mockContext.body).toEqual({ message: new Error('database error') })
         jest.restoreAllMocks()
     })
 

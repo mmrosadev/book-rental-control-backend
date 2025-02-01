@@ -15,7 +15,7 @@ export class BookCreateService implements IBookCreateService {
 
             return result
         } catch (error) {
-            throw new Error(`Faleid to create book: ${(error instanceof Error ? error.message : 'Unknown error')}`)
+            throw new Error(`${(error instanceof Error ? error.message : 'Unknown error')}`)
         }
     }
 }

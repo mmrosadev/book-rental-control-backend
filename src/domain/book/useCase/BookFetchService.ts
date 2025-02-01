@@ -8,12 +8,20 @@ export class BookFetchService implements IBookFetchService {
     async handle(
         queryParams: IBookFetchQueryParams
     ): Promise<IBookFetchDataResponse> {
-        const result = await this.bookFetchRepository.handle(queryParams)
 
-        if (!result) {
-            throw new Error('failed to fetch books')
+        try {
+
+            const result = await this.bookFetchRepository.handle(queryParams)
+
+            if (!result) {
+                throw new Error('failed to fetch books')
+            }
+
+            return result
+
+        } catch (error) {
+            throw new Error(`${(error instanceof Error ? error.message : 'Unknown error')}`)
         }
 
-        return result
     }
 }
