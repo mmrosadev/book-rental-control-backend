@@ -2,14 +2,24 @@
 
 NodeJS api to manage book rental
 
+### how to run this application by docker?
 
-### how to run application?
+> docker compose up -d book-rental-control
 
-- npm run start
+> docker compose exec book-rental-control bash
 
-### create migration
+> npm run migration:run
 
-- npm run migration:create ./src/infra/migrations/MigrationName
+### how to run this application on local without docker?
+
+- Install postgres
+- Create conections for database
+- Create database
+- Adjust enviroment's variable in .env
+
+> npm run start
+
+> npm run migration:run
 
 
 ### folder structure
