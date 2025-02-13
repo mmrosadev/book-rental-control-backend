@@ -13,14 +13,13 @@ NodeJS api to manage book rental
 ### how to run this application on local without docker?
 
 - Install postgres
-- Create conections for database
+- Create connection for database
 - Create database
 - Adjust enviroment's variable in .env
 
 > npm run start
 
 > npm run migration:run
-
 
 ### folder structure
 
